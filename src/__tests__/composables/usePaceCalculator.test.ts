@@ -402,9 +402,6 @@ describe("usePaceCalculator", () => {
 
   describe("pace calculation edge cases", () => {
     it("should use sec unit when pace is very fast (< 60 seconds)", () => {
-      // Para que el ritmo sea < 60 seg/km, necesitamos tiempo/distancia < 60
-      // Con distancia 0.5 km y tiempo 30 seg, ritmo = 30/0.5 = 60 seg/km (límite)
-      // Con distancia 0.6 km y tiempo 30 seg, ritmo = 30/0.6 = 50 seg/km (< 60)
       calculator.distance.value = 0.6;
       calculator.distanceUnit.value = "km";
       calculator.time.value = "30";

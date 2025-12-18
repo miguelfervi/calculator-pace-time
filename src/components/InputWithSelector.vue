@@ -9,9 +9,33 @@
           :value="displayValue"
           :type="inputType"
           :placeholder="placeholder"
-          :class="[inputClasses, inputType === 'number' ? 'no-spinner' : '']"
+          :class="[
+            inputClasses,
+            inputType === 'number' ? 'no-spinner' : '',
+            isCalculated ? 'pr-12' : '',
+          ]"
           @input="handleInput"
         />
+        <div
+          v-if="isCalculated"
+          class="absolute right-10 top-1/2 -translate-y-1/2 text-green-600 dark:text-green-400"
+          title="Valor calculado"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
         <ClearButton
           :visible="isVisible"
           :on-click="handleClear"
@@ -47,10 +71,12 @@ interface Props {
   isVisible: boolean;
   clearTitle: string;
   inputClasses: string | string[];
+  isCalculated?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   inputType: "text",
+  isCalculated: false,
 });
 
 const emit = defineEmits<{
